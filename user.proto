@@ -17,5 +17,5 @@ message UserRegister {
 }
 
 message UserRegisterResponse {
-  bool success = 1;
+  string success = 1;
 }
