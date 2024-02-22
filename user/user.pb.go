@@ -145,7 +145,9 @@ func (x *UserRegisterRequest) GetKey() string {
 	}
 	return ""
 }
-
+type ResponseInterface interface {
+	GetResponseData() string
+}
 type CommonResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -155,7 +157,6 @@ type CommonResponse struct {
 	StatusCode   int64  `protobuf:"varint,2,opt,name=StatusCode,proto3" json:"StatusCode,omitempty"`
 	ResponseData string `protobuf:"bytes,3,opt,name=ResponseData,proto3" json:"ResponseData,omitempty"`
 }
-
 func (x *CommonResponse) Reset() {
 	*x = CommonResponse{}
 	if protoimpl.UnsafeEnabled {
@@ -203,10 +204,7 @@ func (x *CommonResponse) GetStatusCode() int64 {
 }
 
 func (x *CommonResponse) GetResponseData() string {
-	if x != nil {
-		return x.ResponseData
-	}
-	return ""
+	return x.ResponseData
 }
 
 var File_user_proto protoreflect.FileDescriptor
