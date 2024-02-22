@@ -21,6 +21,6 @@ message UserRegisterRequest{
 
 message CommonResponse{
   string Message = 1;
-  string StatusCode = 2;
+  int64 StatusCode = 2;
   string ResponseData = 3;
 }
