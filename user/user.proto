@@ -7,21 +7,127 @@ import "google/protobuf/struct.proto";
 service UserService{
   rpc RegisterUser(UserRegisterRequest) returns (CommonResponse);
   rpc UserLogin(UserRegisterRequest) returns (CommonResponse);
+  rpc UpdateNickName(UpdateNickNameRequest) returns(CommonResponse);
 }
-message UserLoginRequest{
-  string user_name = 1;
-  string password = 2;
-}
+//用户注册
 message UserRegisterRequest{
   string nick_name = 1;
   string user_name = 2;
   string password = 3;
   string  key = 4;
 }
+//用户登陆
+message UserLoginRequest{
+  string user_name = 1;
+  string password = 2;
+}
+//修改昵称
+message UpdateNickNameRequest{
+  string nick_name = 1;
+  string user_id = 2;
+}
+//上传头像
+message UploadAvatarRequest {
+  string user_id = 1;
+  bytes file_data = 2;
+  int64 file_size = 3;
+}
+//发送邮件
+message SendEmailRequest{
+  string user_id = 1;
+  string operation_type = 2;
+  string email = 3;
+  string password = 4;
+}
+//验证邮件
+message ValidEmailRequest{
+  string user_id = 1;
+  string operation_type = 2;
+  string email = 3;
+  string password = 4;
+}
+//显示用户金额
+message ShowMoneyRequest{
+  string user_id = 1;
+  string key = 2;
+}
+//用户新建地址
+message UserCreateAddressRequest{
+  string user_id = 1;
+  string name = 2;
+  string phone = 3;
+  string address = 4;
+}
+//展示全部地址
+message ListAddressRequest{
+  string user_id = 1;
+}
+//修改用户地址
+message UpdateAddressRequest{
+  string user_id = 1;
+  string name = 2;
+  string phone = 3;
+  string address = 4;
+  string address_id = 5;
+}
+//删除用户某个地址
+message DeleteAddressRequest{
+  string user_id = 1;
+  string address_id = 2;
+}
+//创建购物车
+message CreateCartRequest{
+  string user_id = 1;
+  string product_id = 2;
+  string boss_id = 3;
+  string num = 4;
+}
+//展示购物车详细信息
+message ShowCartsRequest{
+  string user_id = 1;
+}
+//修改购物车内容，主要是修改购物车中商品的数量
+message UpdateCartRequest{
+  string user_id = 1;
+  string product_id = 2;
+  string num = 3;
+}
+//删除购物车
+message DeleteCartRequest{
+  string user_id = 1;
+  string product_id = 2;
+}
+//用户创建订单
+message CreateOrderRequest{
+  string user_id = 1;
+  string product_id = 2;
+  string boss_id = 3;
+  string num = 4;
+  string money = 5;
+  string type = 6;
+}
+//展示用户订单列表,type中1表示没有支付，2表示已经支付
+message ListOrdersRequest{
+  string user_id = 1;
+  string type = 2;
+}
+//展示订单详情
+message ShowOrderRequest{
+  string user_id = 1;
+  string product_id = 2;
+  string order_id = 3;
+  string address_id = 4;
+}
+//删除订单
+message DeleteOrderRequest{
+  string user_id = 1;
+  string order_id = 2;
+}
+
 
 message CommonResponse{
   int64 StatusCode = 1;
   string Message = 2;
   string ResponseData = 3;
-  google.protobuf.Struct response_data_json = 4;
+  google.protobuf.Struct ResponseDataJson = 4;
 }
