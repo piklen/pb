@@ -61,10 +61,7 @@ message SendEmailRequest{
 }
 //验证邮件
 message ValidEmailRequest{
-  string user_id = 1;
-  string operation_type = 2;
-  string email = 3;
-  string password = 4;
+ string token=1;
 }
 //显示用户金额
 message ShowMoneyRequest{
