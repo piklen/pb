@@ -5,9 +5,29 @@ option go_package = "/";
 package user;
 import "google/protobuf/struct.proto";
 service UserService{
+  //用户基础行为
   rpc RegisterUser(UserRegisterRequest) returns (CommonResponse);
   rpc UserLogin(UserRegisterRequest) returns (CommonResponse);
   rpc UpdateNickName(UpdateNickNameRequest) returns(CommonResponse);
+  rpc UploadAvatar(UploadAvatarRequest) returns(CommonResponse);
+  rpc SendEmail(SendEmailRequest) returns(CommonResponse);
+  rpc ValidEmail(ValidEmailRequest) returns(CommonResponse);
+  rpc ShowMoney(ShowMoneyRequest) returns(CommonResponse);
+  //用户地址模块
+  rpc UserCreateAddress(UserCreateAddressRequest) returns(CommonResponse);
+  rpc ListAddress(ListAddressRequest) returns(CommonResponse);
+  rpc UpdateAddress(UpdateAddressRequest) returns(CommonResponse);
+  rpc DeleteAddress(DeleteAddressRequest) returns(CommonResponse);
+  //用户购物车模块
+  rpc CreateCart(CreateCartRequest) returns(CommonResponse);
+  rpc ShowCarts(ShowCartsRequest) returns(CommonResponse);
+  rpc UpdateCart(UpdateCartRequest) returns(CommonResponse);
+  rpc DeleteCart(DeleteCartRequest) returns(CommonResponse);
+  //用户订单模块
+  rpc CreateOrder(CreateOrderRequest) returns(CommonResponse);
+  rpc ListOrders(ListOrdersRequest) returns(CommonResponse);
+  rpc ShowOrder(ShowOrderRequest) returns(CommonResponse);
+  rpc DeleteOrder(DeleteOrderRequest) returns(CommonResponse);
 }
 //用户注册
 message UserRegisterRequest{

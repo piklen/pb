@@ -19,18 +19,54 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_RegisterUser_FullMethodName   = "/user.UserService/RegisterUser"
-	UserService_UserLogin_FullMethodName      = "/user.UserService/UserLogin"
-	UserService_UpdateNickName_FullMethodName = "/user.UserService/UpdateNickName"
+	UserService_RegisterUser_FullMethodName      = "/user.UserService/RegisterUser"
+	UserService_UserLogin_FullMethodName         = "/user.UserService/UserLogin"
+	UserService_UpdateNickName_FullMethodName    = "/user.UserService/UpdateNickName"
+	UserService_UploadAvatar_FullMethodName      = "/user.UserService/UploadAvatar"
+	UserService_SendEmail_FullMethodName         = "/user.UserService/SendEmail"
+	UserService_ValidEmail_FullMethodName        = "/user.UserService/ValidEmail"
+	UserService_ShowMoney_FullMethodName         = "/user.UserService/ShowMoney"
+	UserService_UserCreateAddress_FullMethodName = "/user.UserService/UserCreateAddress"
+	UserService_ListAddress_FullMethodName       = "/user.UserService/ListAddress"
+	UserService_UpdateAddress_FullMethodName     = "/user.UserService/UpdateAddress"
+	UserService_DeleteAddress_FullMethodName     = "/user.UserService/DeleteAddress"
+	UserService_CreateCart_FullMethodName        = "/user.UserService/CreateCart"
+	UserService_ShowCarts_FullMethodName         = "/user.UserService/ShowCarts"
+	UserService_UpdateCart_FullMethodName        = "/user.UserService/UpdateCart"
+	UserService_DeleteCart_FullMethodName        = "/user.UserService/DeleteCart"
+	UserService_CreateOrder_FullMethodName       = "/user.UserService/CreateOrder"
+	UserService_ListOrders_FullMethodName        = "/user.UserService/ListOrders"
+	UserService_ShowOrder_FullMethodName         = "/user.UserService/ShowOrder"
+	UserService_DeleteOrder_FullMethodName       = "/user.UserService/DeleteOrder"
 )
 
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
+	// 用户基础行为
 	RegisterUser(ctx context.Context, in *UserRegisterRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	UserLogin(ctx context.Context, in *UserRegisterRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	UpdateNickName(ctx context.Context, in *UpdateNickNameRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	UploadAvatar(ctx context.Context, in *UploadAvatarRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	ValidEmail(ctx context.Context, in *ValidEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	ShowMoney(ctx context.Context, in *ShowMoneyRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	// 用户地址模块
+	UserCreateAddress(ctx context.Context, in *UserCreateAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	ListAddress(ctx context.Context, in *ListAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	UpdateAddress(ctx context.Context, in *UpdateAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	DeleteAddress(ctx context.Context, in *DeleteAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	// 用户购物车模块
+	CreateCart(ctx context.Context, in *CreateCartRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	ShowCarts(ctx context.Context, in *ShowCartsRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	UpdateCart(ctx context.Context, in *UpdateCartRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	DeleteCart(ctx context.Context, in *DeleteCartRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	// 用户订单模块
+	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	ShowOrder(ctx context.Context, in *ShowOrderRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	DeleteOrder(ctx context.Context, in *DeleteOrderRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 }
 
 type userServiceClient struct {
@@ -68,13 +104,177 @@ func (c *userServiceClient) UpdateNickName(ctx context.Context, in *UpdateNickNa
 	return out, nil
 }
 
+func (c *userServiceClient) UploadAvatar(ctx context.Context, in *UploadAvatarRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_UploadAvatar_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_SendEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ValidEmail(ctx context.Context, in *ValidEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_ValidEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ShowMoney(ctx context.Context, in *ShowMoneyRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_ShowMoney_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserCreateAddress(ctx context.Context, in *UserCreateAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_UserCreateAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ListAddress(ctx context.Context, in *ListAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_ListAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateAddress(ctx context.Context, in *UpdateAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteAddress(ctx context.Context, in *DeleteAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_DeleteAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) CreateCart(ctx context.Context, in *CreateCartRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_CreateCart_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ShowCarts(ctx context.Context, in *ShowCartsRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_ShowCarts_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateCart(ctx context.Context, in *UpdateCartRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateCart_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteCart(ctx context.Context, in *DeleteCartRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_DeleteCart_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_CreateOrder_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ListOrders(ctx context.Context, in *ListOrdersRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_ListOrders_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ShowOrder(ctx context.Context, in *ShowOrderRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_ShowOrder_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteOrder(ctx context.Context, in *DeleteOrderRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_DeleteOrder_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
+	// 用户基础行为
 	RegisterUser(context.Context, *UserRegisterRequest) (*CommonResponse, error)
 	UserLogin(context.Context, *UserRegisterRequest) (*CommonResponse, error)
 	UpdateNickName(context.Context, *UpdateNickNameRequest) (*CommonResponse, error)
+	UploadAvatar(context.Context, *UploadAvatarRequest) (*CommonResponse, error)
+	SendEmail(context.Context, *SendEmailRequest) (*CommonResponse, error)
+	ValidEmail(context.Context, *ValidEmailRequest) (*CommonResponse, error)
+	ShowMoney(context.Context, *ShowMoneyRequest) (*CommonResponse, error)
+	// 用户地址模块
+	UserCreateAddress(context.Context, *UserCreateAddressRequest) (*CommonResponse, error)
+	ListAddress(context.Context, *ListAddressRequest) (*CommonResponse, error)
+	UpdateAddress(context.Context, *UpdateAddressRequest) (*CommonResponse, error)
+	DeleteAddress(context.Context, *DeleteAddressRequest) (*CommonResponse, error)
+	// 用户购物车模块
+	CreateCart(context.Context, *CreateCartRequest) (*CommonResponse, error)
+	ShowCarts(context.Context, *ShowCartsRequest) (*CommonResponse, error)
+	UpdateCart(context.Context, *UpdateCartRequest) (*CommonResponse, error)
+	DeleteCart(context.Context, *DeleteCartRequest) (*CommonResponse, error)
+	// 用户订单模块
+	CreateOrder(context.Context, *CreateOrderRequest) (*CommonResponse, error)
+	ListOrders(context.Context, *ListOrdersRequest) (*CommonResponse, error)
+	ShowOrder(context.Context, *ShowOrderRequest) (*CommonResponse, error)
+	DeleteOrder(context.Context, *DeleteOrderRequest) (*CommonResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -90,6 +290,54 @@ func (UnimplementedUserServiceServer) UserLogin(context.Context, *UserRegisterRe
 }
 func (UnimplementedUserServiceServer) UpdateNickName(context.Context, *UpdateNickNameRequest) (*CommonResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNickName not implemented")
+}
+func (UnimplementedUserServiceServer) UploadAvatar(context.Context, *UploadAvatarRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadAvatar not implemented")
+}
+func (UnimplementedUserServiceServer) SendEmail(context.Context, *SendEmailRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendEmail not implemented")
+}
+func (UnimplementedUserServiceServer) ValidEmail(context.Context, *ValidEmailRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidEmail not implemented")
+}
+func (UnimplementedUserServiceServer) ShowMoney(context.Context, *ShowMoneyRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowMoney not implemented")
+}
+func (UnimplementedUserServiceServer) UserCreateAddress(context.Context, *UserCreateAddressRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserCreateAddress not implemented")
+}
+func (UnimplementedUserServiceServer) ListAddress(context.Context, *ListAddressRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAddress not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateAddress(context.Context, *UpdateAddressRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAddress not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteAddress(context.Context, *DeleteAddressRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAddress not implemented")
+}
+func (UnimplementedUserServiceServer) CreateCart(context.Context, *CreateCartRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCart not implemented")
+}
+func (UnimplementedUserServiceServer) ShowCarts(context.Context, *ShowCartsRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowCarts not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateCart(context.Context, *UpdateCartRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCart not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteCart(context.Context, *DeleteCartRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCart not implemented")
+}
+func (UnimplementedUserServiceServer) CreateOrder(context.Context, *CreateOrderRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
+}
+func (UnimplementedUserServiceServer) ListOrders(context.Context, *ListOrdersRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOrders not implemented")
+}
+func (UnimplementedUserServiceServer) ShowOrder(context.Context, *ShowOrderRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowOrder not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteOrder(context.Context, *DeleteOrderRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrder not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -158,6 +406,294 @@ func _UserService_UpdateNickName_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UploadAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadAvatarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UploadAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UploadAvatar_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UploadAvatar(ctx, req.(*UploadAvatarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_SendEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).SendEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_SendEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).SendEmail(ctx, req.(*SendEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ValidEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ValidEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ValidEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ValidEmail(ctx, req.(*ValidEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ShowMoney_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowMoneyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ShowMoney(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ShowMoney_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ShowMoney(ctx, req.(*ShowMoneyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserCreateAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserCreateAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserCreateAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserCreateAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserCreateAddress(ctx, req.(*UserCreateAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ListAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ListAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ListAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ListAddress(ctx, req.(*ListAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateAddress(ctx, req.(*UpdateAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteAddress(ctx, req.(*DeleteAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_CreateCart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).CreateCart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_CreateCart_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).CreateCart(ctx, req.(*CreateCartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ShowCarts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowCartsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ShowCarts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ShowCarts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ShowCarts(ctx, req.(*ShowCartsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateCart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateCart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateCart_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateCart(ctx, req.(*UpdateCartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteCart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteCart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteCart_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteCart(ctx, req.(*DeleteCartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_CreateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).CreateOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_CreateOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).CreateOrder(ctx, req.(*CreateOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ListOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ListOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ListOrders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ListOrders(ctx, req.(*ListOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ShowOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ShowOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ShowOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ShowOrder(ctx, req.(*ShowOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteOrder(ctx, req.(*DeleteOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +712,70 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateNickName",
 			Handler:    _UserService_UpdateNickName_Handler,
+		},
+		{
+			MethodName: "UploadAvatar",
+			Handler:    _UserService_UploadAvatar_Handler,
+		},
+		{
+			MethodName: "SendEmail",
+			Handler:    _UserService_SendEmail_Handler,
+		},
+		{
+			MethodName: "ValidEmail",
+			Handler:    _UserService_ValidEmail_Handler,
+		},
+		{
+			MethodName: "ShowMoney",
+			Handler:    _UserService_ShowMoney_Handler,
+		},
+		{
+			MethodName: "UserCreateAddress",
+			Handler:    _UserService_UserCreateAddress_Handler,
+		},
+		{
+			MethodName: "ListAddress",
+			Handler:    _UserService_ListAddress_Handler,
+		},
+		{
+			MethodName: "UpdateAddress",
+			Handler:    _UserService_UpdateAddress_Handler,
+		},
+		{
+			MethodName: "DeleteAddress",
+			Handler:    _UserService_DeleteAddress_Handler,
+		},
+		{
+			MethodName: "CreateCart",
+			Handler:    _UserService_CreateCart_Handler,
+		},
+		{
+			MethodName: "ShowCarts",
+			Handler:    _UserService_ShowCarts_Handler,
+		},
+		{
+			MethodName: "UpdateCart",
+			Handler:    _UserService_UpdateCart_Handler,
+		},
+		{
+			MethodName: "DeleteCart",
+			Handler:    _UserService_DeleteCart_Handler,
+		},
+		{
+			MethodName: "CreateOrder",
+			Handler:    _UserService_CreateOrder_Handler,
+		},
+		{
+			MethodName: "ListOrders",
+			Handler:    _UserService_ListOrders_Handler,
+		},
+		{
+			MethodName: "ShowOrder",
+			Handler:    _UserService_ShowOrder_Handler,
+		},
+		{
+			MethodName: "DeleteOrder",
+			Handler:    _UserService_DeleteOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
