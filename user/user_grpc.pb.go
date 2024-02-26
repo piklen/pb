@@ -24,7 +24,9 @@ const (
 	UserService_UpdateNickName_FullMethodName    = "/user.UserService/UpdateNickName"
 	UserService_UploadAvatar_FullMethodName      = "/user.UserService/UploadAvatar"
 	UserService_SendEmail_FullMethodName         = "/user.UserService/SendEmail"
+	UserService_SendCode_FullMethodName          = "/user.UserService/SendCode"
 	UserService_ValidEmail_FullMethodName        = "/user.UserService/ValidEmail"
+	UserService_VerifyCode_FullMethodName        = "/user.UserService/VerifyCode"
 	UserService_ShowMoney_FullMethodName         = "/user.UserService/ShowMoney"
 	UserService_UserCreateAddress_FullMethodName = "/user.UserService/UserCreateAddress"
 	UserService_ListAddress_FullMethodName       = "/user.UserService/ListAddress"
@@ -50,7 +52,9 @@ type UserServiceClient interface {
 	UpdateNickName(ctx context.Context, in *UpdateNickNameRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	UploadAvatar(ctx context.Context, in *UploadAvatarRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	SendEmail(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	SendCode(ctx context.Context, in *SendCodeRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	ValidEmail(ctx context.Context, in *ValidEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error)
+	VerifyCode(ctx context.Context, in *VerifyCodeRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	ShowMoney(ctx context.Context, in *ShowMoneyRequest, opts ...grpc.CallOption) (*CommonResponse, error)
 	// 用户地址模块
 	UserCreateAddress(ctx context.Context, in *UserCreateAddressRequest, opts ...grpc.CallOption) (*CommonResponse, error)
@@ -122,9 +126,27 @@ func (c *userServiceClient) SendEmail(ctx context.Context, in *SendEmailRequest,
 	return out, nil
 }
 
+func (c *userServiceClient) SendCode(ctx context.Context, in *SendCodeRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_SendCode_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) ValidEmail(ctx context.Context, in *ValidEmailRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
 	out := new(CommonResponse)
 	err := c.cc.Invoke(ctx, UserService_ValidEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) VerifyCode(ctx context.Context, in *VerifyCodeRequest, opts ...grpc.CallOption) (*CommonResponse, error) {
+	out := new(CommonResponse)
+	err := c.cc.Invoke(ctx, UserService_VerifyCode_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -258,7 +280,9 @@ type UserServiceServer interface {
 	UpdateNickName(context.Context, *UpdateNickNameRequest) (*CommonResponse, error)
 	UploadAvatar(context.Context, *UploadAvatarRequest) (*CommonResponse, error)
 	SendEmail(context.Context, *SendEmailRequest) (*CommonResponse, error)
+	SendCode(context.Context, *SendCodeRequest) (*CommonResponse, error)
 	ValidEmail(context.Context, *ValidEmailRequest) (*CommonResponse, error)
+	VerifyCode(context.Context, *VerifyCodeRequest) (*CommonResponse, error)
 	ShowMoney(context.Context, *ShowMoneyRequest) (*CommonResponse, error)
 	// 用户地址模块
 	UserCreateAddress(context.Context, *UserCreateAddressRequest) (*CommonResponse, error)
@@ -297,8 +321,14 @@ func (UnimplementedUserServiceServer) UploadAvatar(context.Context, *UploadAvata
 func (UnimplementedUserServiceServer) SendEmail(context.Context, *SendEmailRequest) (*CommonResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmail not implemented")
 }
+func (UnimplementedUserServiceServer) SendCode(context.Context, *SendCodeRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendCode not implemented")
+}
 func (UnimplementedUserServiceServer) ValidEmail(context.Context, *ValidEmailRequest) (*CommonResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidEmail not implemented")
+}
+func (UnimplementedUserServiceServer) VerifyCode(context.Context, *VerifyCodeRequest) (*CommonResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyCode not implemented")
 }
 func (UnimplementedUserServiceServer) ShowMoney(context.Context, *ShowMoneyRequest) (*CommonResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ShowMoney not implemented")
@@ -442,6 +472,24 @@ func _UserService_SendEmail_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_SendCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).SendCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_SendCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).SendCode(ctx, req.(*SendCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_ValidEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidEmailRequest)
 	if err := dec(in); err != nil {
@@ -456,6 +504,24 @@ func _UserService_ValidEmail_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).ValidEmail(ctx, req.(*ValidEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_VerifyCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).VerifyCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_VerifyCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).VerifyCode(ctx, req.(*VerifyCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -722,8 +788,16 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_SendEmail_Handler,
 		},
 		{
+			MethodName: "SendCode",
+			Handler:    _UserService_SendCode_Handler,
+		},
+		{
 			MethodName: "ValidEmail",
 			Handler:    _UserService_ValidEmail_Handler,
+		},
+		{
+			MethodName: "VerifyCode",
+			Handler:    _UserService_VerifyCode_Handler,
 		},
 		{
 			MethodName: "ShowMoney",

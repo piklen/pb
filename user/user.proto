@@ -11,7 +11,9 @@ service UserService{
   rpc UpdateNickName(UpdateNickNameRequest) returns(CommonResponse);
   rpc UploadAvatar(UploadAvatarRequest) returns(CommonResponse);
   rpc SendEmail(SendEmailRequest) returns(CommonResponse);
+  rpc SendCode(SendCodeRequest) returns(CommonResponse);
   rpc ValidEmail(ValidEmailRequest) returns(CommonResponse);
+  rpc VerifyCode(VerifyCodeRequest) returns(CommonResponse);
   rpc ShowMoney(ShowMoneyRequest) returns(CommonResponse);
   //用户地址模块
   rpc UserCreateAddress(UserCreateAddressRequest) returns(CommonResponse);
@@ -50,7 +52,6 @@ message UpdateNickNameRequest{
 message UploadAvatarRequest {
   string user_id = 1;
   bytes file_data = 2;
-  int64 file_size = 3;
 }
 //发送邮件
 message SendEmailRequest{
@@ -59,9 +60,21 @@ message SendEmailRequest{
   string email = 3;
   string password = 4;
 }
+//发送验证码
+message SendCodeRequest{
+  string user_id = 1;
+  string operation_type = 2;
+  string email = 3;
+  string password = 4;
+}
 //验证邮件
 message ValidEmailRequest{
  string token=1;
+}
+//验证验证码
+message VerifyCodeRequest{
+  string code=1;
+  string token=2;
 }
 //显示用户金额
 message ShowMoneyRequest{
